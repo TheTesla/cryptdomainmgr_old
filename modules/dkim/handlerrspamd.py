@@ -72,7 +72,8 @@ def createDKIM(keysize, destination):
         raise(e)
     v = keyTxt.split('v=')[1].split(';')[0]
     k = keyTxt.split('k=')[1].split(';')[0]
-    p = keyTxt.split('p=')[1].split('\"')[0]
+    pL = keyTxt.split('p=')[1].split('\"')
+    p = "".join([e for e in pL if ")" not in e and "\n" not in e])
     return {'v': v, 'k': k, 'p': p, 'keyfile': str(destination)}
 
 
