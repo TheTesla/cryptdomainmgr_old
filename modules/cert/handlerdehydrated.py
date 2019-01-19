@@ -56,13 +56,17 @@ def prepare(certConfig, certState, statedir, domainList, domainAccessTable):
         args.extend(['-d', str(d)])
     log.debug(args)
     certState.setOpStateRunning()
-    try:
-        rv = check_output(args, env=dict(os.environ, DOMAINACCESSTABLE=domainAccessTable))
-        log.info(rv)
-    except CalledProcessError as e:
-        log.error(e.output)
-        time.sleep(1)
-        raise(e)
+
+    for i in range(10):
+        try:
+            rv = check_output(args, env=dict(os.environ, DOMAINACCESSTABLE=domainAccessTable))
+            log.info(rv)
+            break
+        except CalledProcessError as e:
+            log.error(e.output)
+            time.sleep(1)
+            if 9 == i:
+                raise(e)
 
     res = []
     rv = rv.splitlines()
