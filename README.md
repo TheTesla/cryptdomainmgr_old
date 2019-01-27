@@ -107,7 +107,7 @@ Long term goals:
 * DNSSEC key renewal
 * TXT record (may collide with SPF and other TXT based records)
 * multi server support for one domain: TLSA delete by timeout
-* contrain minimum renewal/phase time interval
+* constrain minimum renewal/phase time interval
 * validations - ensure signatures are used correctly
 * run as service
 * PowerDNS support
